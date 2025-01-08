@@ -9,6 +9,9 @@ class State(rx.State):
     def set_label(self, label: str):
         self.label = label
 
+    def handle_input_change(self, value: str):
+        self.label = value
+
 
 def index() -> rx.Component:
     # Welcome Page (Index)
@@ -20,6 +23,10 @@ def index() -> rx.Component:
                 "Get started by editing ",
                 rx.code(f"{config.app_name}/{config.app_name}.py"),
                 size="5",
+            ),
+            rx.input(
+                placeholder="Enter your name",
+                on_change=State.handle_input_change,
             ),
             rx.link(
                 rx.button(
